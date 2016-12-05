@@ -3,13 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-route/angular-route.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script> 
-    <script src="controller.js"></script> 
+    <script src="app/controller.js"></script> 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
 	<title>Test</title>
 </head>
 <body ng-app="app">
+<div class="container-fluid">
+	<div class="col-md-2">
+		<a href="#/main" title="">Main page</a>
+	</div>	
+	<div class="col-md-10">
+		<div class="row">
+			<ui-view></ui-view>
+		</div>
+	</div>
+</div>
 </body>
 </html>
