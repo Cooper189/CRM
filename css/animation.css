@@ -1,0 +1,33 @@
+.animation.ng-leave{
+ opacity: 1;
+ position: absolute;
+ top: 0;
+ -webkit-animation-duration: 0.5s;
+         animation-duration: 0.5s;
+ -webkit-animation-fill-mode: both;
+         animation-fill-mode: both;
+ -webkit-animation-name: downfromtop;
+         animation-name: downfromtop;
+}
+
+@-webkit-keyframes downfromtop {
+ 0%{
+   opacity: 1;
+   position: absolute;
+ }
+ 100% {
+   opacity: 0;
+   position: absolute;
+ }
+}
+
+@keyframes downfromtop {
+ 0%{
+   opacity: 1;
+   position: absolute;
+ }
+ 100% {
+   opacity:  0;
+   position: absolute;
+ }
+}
