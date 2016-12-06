@@ -1,7 +1,6 @@
 var app = angular.module('app', ['ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
-
     $stateProvider
         .state('main', {
           url: '/main',
@@ -17,20 +16,21 @@ app.directive('task', [function () {
 		templateUrl: null,
 		bindToController: true,
 		controllerAs: 'task',
-		controller: function () {
+		controller: function ($scope) {
 			this.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
-			this.save = () => {
-				localStorage.tasks = JSON.stringify(this.tasks);
-			}
 			this.createTask = () => {
 				this.singel.status = false;
 				this.tasks.push(this.singel);
-				this.save();
 			}
 			this.complit = (comp) => {
 				comp.status = !comp.status;
-				this.save();
 			}
+		},
+		link: function (scope) {
+			scope.$watch('task.tasks', function (y,x) {
+				// localStorage.tasks = JSON.stringify(x);
+				localStorage.tasks = JSON.stringify(this.tasks);
+			}, true)
 		}
 	};
 }])	
