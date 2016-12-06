@@ -17,25 +17,19 @@ app.directive('task', [function () {
 		templateUrl: null,
 		bindToController: true,
 		controllerAs: 'task',
-		controller: function ($scope) {
-			var self = this;
-			self.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
-			self.save = function () {
-				localStorage.tasks = JSON.stringify(self.tasks);
+		controller: function () {
+			this.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
+			this.save = () => {
+				localStorage.tasks = JSON.stringify(this.tasks);
 			}
-			self.createTask = function (x, y, z, p) {
-				var singel = {};
-					singel.id = x;
-					singel.title = y;
-					singel.dis = z;
-					singel.status = false;
-					singel.com = p;
-				self.tasks.push(singel);
-				self.save();
+			this.createTask = () => {
+				this.singel.status = false;
+				this.tasks.push(this.singel);
+				this.save();
 			}
-			self.complit = function (comp) {
+			this.complit = (comp) => {
 				comp.status = !comp.status;
-				self.save();
+				this.save();
 			}
 		}
 	};
