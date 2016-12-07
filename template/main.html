@@ -1,19 +1,9 @@
-<task>
+<main>
 	<div class="col-md-12">
-		<p>Создать задачу</p>
-		<input type="text" name="" ng-model="data.name" placeholder="name">
-		<input type="text" name="" ng-model="data.title" placeholder="title">
-		<input type="text" name="" ng-model="data.dis" placeholder="discription">
-		<input type="text" name="" ng-model="data.com" placeholder="commit">
-		<button class="btn btn-primary btn-sm" ng-click="task.createTask(data)">Создать</button>
-	</div>
-	<div class="col-md-12">
-		<div class="list-group-item row" ng-repeat="tasks in task.tasks track by $index">
-       		<div class="col-md-8">{{tasks.title}}</div>
-       		<div class="col-md-4">{{tasks.status}}</div>
-       		<div class="col-md-12">{{tasks.dis}}</div>
-       		<div class="col-md-12">{{tasks.com}}</div>
-       		<button class="btn btn-success" ng-click="task.complit(tasks)">Выполнить</button>
+		<div class="list-group-item row" ng-repeat="massages in main.massage track by $index">
+       		<div class="col-md-8">{{massages.title}}</div>
+       		<div class="col-md-12">{{massages.img}}</div>
+       		<a ui-sref="vol.text({id:{{massages.id}} })">Выполнить</a>
     	</div>
 	</div>
-</task>
+</main>
