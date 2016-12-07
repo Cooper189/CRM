@@ -22,9 +22,14 @@ app.directive('task', [function () {
 			this.save = () => {
 				localStorage.tasks = JSON.stringify(this.tasks);
 			}
-			this.createTask = () => {
-				this.singel.status = false;
-				this.tasks.push(this.singel);
+			this.createTask = (obj) => {
+				var mainData = {
+					title: obj.title,
+					dis: obj.dis,
+					com: obj.com,
+					status: false
+				}
+				this.tasks.push(mainData);
 				this.save();
 			}
 			this.complit = (comp) => {

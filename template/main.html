@@ -1,11 +1,11 @@
 <task>
 	<div class="col-md-12">
 		<p>Создать задачу</p>
-		<input type="text" name="" ng-model="task.singel.name" placeholder="name">
-		<input type="text" name="" ng-model="task.singel.title" placeholder="title">
-		<input type="text" name="" ng-model="task.singel.dis" placeholder="discription">
-		<input type="text" name="" ng-model="task.singel.com" placeholder="commit">
-		<button class="btn btn-primary btn-sm" ng-click="task.createTask(name, title, dis, com)">Создать</button>
+		<input type="text" name="" ng-model="data.name" placeholder="name">
+		<input type="text" name="" ng-model="data.title" placeholder="title">
+		<input type="text" name="" ng-model="data.dis" placeholder="discription">
+		<input type="text" name="" ng-model="data.com" placeholder="commit">
+		<button class="btn btn-primary btn-sm" ng-click="task.createTask(data)">Создать</button>
 	</div>
 	<div class="col-md-12">
 		<div class="list-group-item row" ng-repeat="tasks in task.tasks track by $index">
