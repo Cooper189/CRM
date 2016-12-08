@@ -3,7 +3,7 @@
 		<div class="list-group-item row" ng-repeat="massages in main.massage | startFrom: main.page.startingItem() | limitTo:  main.page.itemsPerPage track by $index">
        		<div class="col-md-8">{{massages.title}}</div>
        		<div class="col-md-12">{{massages.img}}</div>
-       		<a ui-sref="vol.text({id:{{massages.id}} })">Выполнить</a>
+       		<a ng-href="#/vol/text/{{massages.id}}">Выполнить</a>
     	</div>
     	<div id="pagination" class="row">
       		<button class="pull-left btn btn-primary btn-sm" ng-disabled="main.page.firstPage()" ng-click="main.page.pageBack()">Назад</button>

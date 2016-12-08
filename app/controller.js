@@ -18,6 +18,10 @@ log.config(function($stateProvider, $urlRouterProvider) {
         	url: '/task',
         	templateUrl: 'template/task.html'
         })
+        .state('vol.clients', {
+        	url: '/clients',
+        	templateUrl: 'template/clients.html'
+        })
         .state('vol.text', {
         	url: '/text/:id',
         	templateUrl: 'template/text.html',
@@ -105,7 +109,36 @@ app.directive('main', ['getFactory', '$stateParams','paginator', function (getFa
 			})
 			this.page = paginator
 			this.page.currentPage = 0;
-  			this.page.itemsPerPage = 5;
+  			this.page.itemsPerPage = 8;
+		}
+	};
+}])
+app.directive('cards', [function () {
+	return {
+		scope: {},
+		restrict: 'E',
+		templateUrl: null,
+		bindToController: true,
+		controllerAs: 'cards',
+		controller: function () {
+			this.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
+			this.save = () => {
+				localStorage.tasks = JSON.stringify(this.tasks);
+			}
+			this.createTask = (obj) => {
+				var mainData = {
+					title: obj.title,
+					dis: obj.dis,
+					com: obj.com,
+					status: false
+				}
+				this.tasks.push(mainData);
+				this.save();
+			}
+			this.complit = (comp) => {
+				comp.status = !comp.status;
+				this.save();
+			}
 		}
 	};
 }])
@@ -115,23 +148,23 @@ app.factory('getFactory', ['$resource', function ($resource) {
 		});
 }])
 app.service('paginator', [function () {
-  this.firstPage = function() {
+  this.firstPage = () => {
     return this.currentPage == 0;
   }
-  this.lastPage = function(arr) {
+  this.lastPage = (arr) => {
     var lastPageNum = Math.ceil(arr.length / this.itemsPerPage - 1);
     return this.currentPage == lastPageNum;
   }
-  this.numberOfPages = function(arr){
+  this.numberOfPages = (arr) => {
     return Math.ceil(arr.length / this.itemsPerPage);
   }
-  this.startingItem = function() {
+  this.startingItem = () => {
     return this.currentPage * this.itemsPerPage;
   }
-  this.pageBack = function() {
+  this.pageBack = () => {
     this.currentPage = this.currentPage - 1;
   }
-  this.pageForward = function() {
+  this.pageForward = () => {
     this.currentPage = this.currentPage + 1;
   }
 }])
