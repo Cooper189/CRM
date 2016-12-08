@@ -1,16 +1,14 @@
-var app = angular.module('app', ['ui.router', 'ngResource']);
-
-app.config(function($stateProvider, $urlRouterProvider) {
+var log = angular.module('login', ['ui.router'])
+log.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
     	.state('reg', {
-        	// abstract: true,
         	url: '/reg',
         	templateUrl: 'template/reg.html',
         })
     	.state('vol', {
         	abstract: true,
         	url: '/vol',
-        	template: '<ui-view></ui-view>',
+        	templateUrl: 'template/intro.html',
         })
         .state('vol.mains', {
           url: '/main',
@@ -24,19 +22,37 @@ app.config(function($stateProvider, $urlRouterProvider) {
         	url: '/text/:id',
         	templateUrl: 'template/text.html',
         });
-    // $urlRouterProvider.otherwise('reg');
+    $urlRouterProvider.otherwise('reg');
   });
-app.run(['$rootScope', '$state', function ($rootScope, $state) {
+log.run(['$rootScope', '$state', function ($rootScope, $state) {
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
 		console.log(toState.name)
-		if(toState.name !== 'reg' && localStorage.pass != sessionStorage.getItem('pass')) {
-
+		if(toState.name !== 'reg' && localStorage.pass != sessionStorage.getItem('pass') || localStorage.pass == 'undefined') {
 			event.preventDefault();
 			$state.go('reg', {})
 			console.log('f')
 		}
 	})
 }])
+log.directive('reg', [function () {
+	return {
+		scope: {},
+		restrict: 'E',
+		templateUrl: null,
+		bindToController: true,
+		controllerAs: 'reg',
+		controller: function () {
+			this.login = (log, pass) => {
+				localStorage.log = log;
+				localStorage.pass = pass;
+				sessionStorage.setItem('log',log);
+				sessionStorage.setItem('pass',pass);
+			}
+		}
+	};
+}])
+
+var app = angular.module('app', ['ngResource', 'login']);
 app.directive('task', [function () {
 	return {
 		scope: {},
@@ -80,23 +96,6 @@ app.directive('main', ['getFactory', '$stateParams', function (getFactory, $stat
 				self.massage = val.massages;
 				console.log(val)
 			})
-		}
-	};
-}])
-app.directive('reg', [function () {
-	return {
-		scope: {},
-		restrict: 'E',
-		templateUrl: null,
-		bindToController: true,
-		controllerAs: 'reg',
-		controller: function () {
-			this.login = (log, pass) => {
-				localStorage.log = log;
-				localStorage.pass = pass;
-				sessionStorage.setItem('log',log);
-				sessionStorage.setItem('pass',pass);
-			}
 		}
 	};
 }])
