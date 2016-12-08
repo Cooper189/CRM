@@ -26,11 +26,9 @@ log.config(function($stateProvider, $urlRouterProvider) {
   });
 log.run(['$rootScope', '$state', function ($rootScope, $state) {
 	$rootScope.$on('$stateChangeStart', function (event, toState) {
-		console.log(toState.name)
 		if(toState.name !== 'reg' && localStorage.pass != sessionStorage.getItem('pass') || localStorage.pass == 'undefined') {
 			event.preventDefault();
 			$state.go('reg', {})
-			console.log('f')
 		}
 	})
 }])
@@ -53,14 +51,20 @@ log.directive('reg', [function () {
 }])
 
 var app = angular.module('app', ['ngResource', 'login']);
-app.directive('task', [function () {
+app.filter('startFrom', function(){
+  return function(input, start){
+    start = +start;
+    return input.slice(start);
+  }
+})
+app.directive('task', ['paginator', function (paginator) {
 	return {
 		scope: {},
 		restrict: 'E',
 		templateUrl: null,
 		bindToController: true,
 		controllerAs: 'task',
-		controller: function ($scope) {
+		controller: function () {
 			this.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
 			this.save = () => {
 				localStorage.tasks = JSON.stringify(this.tasks);
@@ -79,6 +83,9 @@ app.directive('task', [function () {
 				comp.status = !comp.status;
 				this.save();
 			}
+			this.page = paginator
+			this.page.currentPage = 0;
+  			this.page.itemsPerPage = 5;
 		},
 	};
 }])	
@@ -103,4 +110,25 @@ app.factory('getFactory', ['$resource', function ($resource) {
 	return $resource('json/:params.json', {
 			params: '@params'
 		});
+}])
+app.service('paginator', [function () {
+  this.firstPage = function() {
+    return this.currentPage == 0;
+  }
+  this.lastPage = function(arr) {
+    var lastPageNum = Math.ceil(arr.length / this.itemsPerPage - 1);
+    return this.currentPage == lastPageNum;
+  }
+  this.numberOfPages = function(arr){
+    return Math.ceil(arr.length / this.itemsPerPage);
+  }
+  this.startingItem = function() {
+    return this.currentPage * this.itemsPerPage;
+  }
+  this.pageBack = function() {
+    this.currentPage = this.currentPage - 1;
+  }
+  this.pageForward = function() {
+    this.currentPage = this.currentPage + 1;
+  }
 }])

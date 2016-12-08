@@ -8,12 +8,17 @@
 		<button class="btn btn-primary btn-sm" ng-click="task.createTask(data)">Создать</button>
 	</div>
 	<div class="col-md-12">
-		<div class="list-group-item row" ng-repeat="tasks in task.tasks track by $index">
+		<div class="list-group-item row" ng-repeat="tasks in task.tasks | startFrom: task.page.startingItem() | limitTo:  task.page.itemsPerPage track by $index">
        		<div class="col-md-8">{{tasks.title}}</div>
        		<div class="col-md-4">{{tasks.status}}</div>
        		<div class="col-md-12">{{tasks.dis}}</div>
        		<div class="col-md-12">{{tasks.com}}</div>
        		<button class="btn btn-success" ng-click="task.complit(tasks)">Выполнить</button>
+    	</div>
+    	<div id="pagination" class="row">
+      		<button class="pull-left btn btn-primary btn-sm" ng-disabled="task.page.firstPage()" ng-click="task.page.pageBack()">Назад</button>
+      		<span>{{task.page.currentPage+1}} из {{task.page.numberOfPages(task.tasks)}}</span>
+     		<button class="pull-right  btn btn-primary btn-sm" ng-disabled="task.page.lastPage(task.tasks)" ng-click="task.page.pageForward()">Вперед</button>
     	</div>
 	</div>
 </task>
