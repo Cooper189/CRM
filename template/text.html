@@ -1,0 +1,10 @@
+<main>
+<h1>test</h1>
+	<div class="col-md-12">
+		<div class="list-group-item row" ng-repeat="massages in main.massage | filter:{id: main.paramsId}">
+       		<div class="col-md-8">{{massages.title}}</div>
+       		<div class="col-md-12">{{massages.text}}</div>
+       		<!-- <button class="btn btn-success"><a href="#/text/{{massages.id}}">Выполнить</a></button> -->
+    	</div>
+	</div>
+</main>
