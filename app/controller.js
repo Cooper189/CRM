@@ -46,11 +46,6 @@ app.directive('task', [function () {
 		controllerAs: 'task',
 		controller: function ($scope) {
 			this.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
-<<<<<<< HEAD
-			this.createTask = () => {
-				this.singel.status = false;
-				this.tasks.push(this.singel);
-=======
 			this.save = () => {
 				localStorage.tasks = JSON.stringify(this.tasks);
 			}
@@ -63,18 +58,12 @@ app.directive('task', [function () {
 				}
 				this.tasks.push(mainData);
 				this.save();
->>>>>>> master
 			}
 			this.complit = (comp) => {
 				comp.status = !comp.status;
+				this.save();
 			}
 		},
-		link: function (scope) {
-			scope.$watch('task.tasks', function (y,x) {
-				// localStorage.tasks = JSON.stringify(x);
-				localStorage.tasks = JSON.stringify(this.tasks);
-			}, true)
-		}
 	};
 }])	
 app.directive('main', ['getFactory', '$stateParams', function (getFactory, $stateParams) {
