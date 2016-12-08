@@ -89,7 +89,7 @@ app.directive('task', ['paginator', function (paginator) {
 		},
 	};
 }])	
-app.directive('main', ['getFactory', '$stateParams', function (getFactory, $stateParams) {
+app.directive('main', ['getFactory', '$stateParams','paginator', function (getFactory, $stateParams, paginator) {
 	return {
 		scope: {},
 		restrict: 'E',
@@ -103,6 +103,9 @@ app.directive('main', ['getFactory', '$stateParams', function (getFactory, $stat
 				self.massage = val.massages;
 				console.log(val)
 			})
+			this.page = paginator
+			this.page.currentPage = 0;
+  			this.page.itemsPerPage = 5;
 		}
 	};
 }])
