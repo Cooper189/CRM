@@ -1,14 +1,23 @@
 <main>
-	<div class="col-md-12">
+	<div class="col-md-8">
 		<div class="list-group-item row" ng-repeat="massages in main.massage | startFrom: main.page.startingItem() | limitTo:  main.page.itemsPerPage track by $index">
        		<div class="col-md-8">{{massages.title}}</div>
        		<div class="col-md-12">{{massages.img}}</div>
-       		<a ng-href="#/vol/text/{{massages.id}}">Выполнить</a>
+       		<div class="col-md-12">{{massages.id}}</div>
+       		<!-- <a ng-href="#/vol/text/{{massages.id}}">Выполнить</a> -->
+       		<button class="pull-right  btn btn-primary btn-sm" ng-click="main.massegId(massages)">Выполнить</button>
     	</div>
     	<div id="pagination" class="row">
-      		<button class="pull-left btn btn-primary btn-sm" ng-disabled="main.page.firstPage()" ng-click="main.page.pageBack()">Назад</button>
-      		<span>{{main.page.currentPage+1}} из {{main.page.numberOfPages(main.massage)}}</span>
-     		<button class="pull-right  btn btn-primary btn-sm" ng-disabled="main.page.lastPage(main.massage)" ng-click="main.page.pageForward()">Вперед</button>
+    	      		<button class="pull-left btn btn-primary btn-sm" ng-disabled="main.page.firstPage()" ng-click="main.page.pageBack()">Назад</button>
+    	      		<span>{{main.page.currentPage+1}} из {{main.page.numberOfPages(main.massage)}}</span>
+    	     		<button class="pull-right  btn btn-primary btn-sm" ng-disabled="main.page.lastPage(main.massage)" ng-click="main.page.pageForward()">Вперед</button>
     	</div>
-	</div>
-</main>
+    		</div>
+    		<div class="col-md-4">
+    			<div>
+    				<div class="col-md-8">{{main.short.title}}</div>
+    	       		<div class="col-md-12">{{main.short.img}}</div>
+    	       		<div class="col-md-12">{{main.short.text}}</div>
+    			</div>
+    		</div>
+    	</main> 

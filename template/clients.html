@@ -1,7 +1,9 @@
-<div class="list-group-item row" ng-repeat="tasks in task.tasks track by $index">
-       	<div class="col-md-8">{{tasks.title}}</div>
-       	<div class="col-md-4">{{tasks.status}}</div>
-       	<div class="col-md-12">{{tasks.dis}}</div>
-       	<div class="col-md-12">{{tasks.com}}</div>
-       	<button class="btn btn-success" ng-click="task.complit(tasks)">Выполнить</button>
+<cards>
+<div class="list-group-item row" ng-repeat="contact in cards.contacts track by $index">
+       	<div class="col-md-8">{{contact.title}}</div>
+       	<div class="col-md-4">{{contact.status}}</div>
+       	<div class="col-md-12">{{contact.dis}}</div>
+       	<div class="col-md-12">{{contact.com}}</div>
+       	<button class="btn btn-success" ng-click="cards.complit(contact)">Выполнить</button>
 </div>
+</cards>

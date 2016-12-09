@@ -102,14 +102,20 @@ app.directive('main', ['getFactory', '$stateParams','paginator', function (getFa
 		controllerAs: 'main',
 		controller: function () {
 			var self = this;
+			this.short = {};
+			this.massegId = (index) => {
+				console.log(index);
+				this.short = index;
+			}
 			self.paramsId = $stateParams.id;
+			self.massage = [];
 			getFactory.save({params: 'main'}, function (val) {
 				self.massage = val.massages;
-				console.log(val)
+				// console.log(val)
 			})
 			this.page = paginator
 			this.page.currentPage = 0;
-  			this.page.itemsPerPage = 8;
+  			this.page.itemsPerPage = 5;
 		}
 	};
 }])
@@ -121,9 +127,9 @@ app.directive('cards', [function () {
 		bindToController: true,
 		controllerAs: 'cards',
 		controller: function () {
-			this.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
+			this.contacts = localStorage.contacts ? JSON.parse(localStorage.contacts) : [];
 			this.save = () => {
-				localStorage.tasks = JSON.stringify(this.tasks);
+				localStorage.contacts = JSON.stringify(this.contacts);
 			}
 			this.createTask = (obj) => {
 				var mainData = {
@@ -132,13 +138,16 @@ app.directive('cards', [function () {
 					com: obj.com,
 					status: false
 				}
-				this.tasks.push(mainData);
+				this.contacts.push(mainData);
 				this.save();
 			}
-			this.complit = (comp) => {
-				comp.status = !comp.status;
-				this.save();
-			}
+		}
+	};
+}])
+app.directive('sidebar', [function () {
+	return {
+		restrict: 'E',
+		link: function (element) {
 		}
 	};
 }])
