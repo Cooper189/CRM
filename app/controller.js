@@ -111,7 +111,6 @@ app.directive('main', ['getFactory', '$stateParams','paginator', function (getFa
 			self.massage = [];
 			getFactory.save({params: 'main'}, function (val) {
 				self.massage = val.massages;
-				// console.log(val)
 			})
 			this.page = paginator
 			this.page.currentPage = 0;
